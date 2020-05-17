@@ -84,7 +84,7 @@ jobs:
         run: |
           mkdir -p build-msvc
           cd build-msvc
-          cmake ../ -G "CodeBlocks - NMake Makefiles" -DCMAKE_BUILD_TYPE=%BUILDTYPE% -DDISABLE_WASM=ON
+          cmake ../ -G "CodeBlocks - NMake Makefiles" -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_BUILD_TYPE=%BUILDTYPE% -DDISABLE_WASM=ON
           cd ..
           cmake --build build-msvc --target tjse
 #          nmake
