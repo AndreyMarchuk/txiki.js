@@ -25,6 +25,7 @@
 #ifndef TJS_UTILS_H
 #define TJS_UTILS_H
 
+#include "tjs_export.h"
 #include <quickjs.h>
 #include <stdbool.h>
 #include <stdlib.h>
@@ -74,35 +75,35 @@ struct AssertionInfo {
 #define CHECK_NULL(val)     CHECK((val) == NULL)
 #define CHECK_NOT_NULL(val) CHECK((val) != NULL)
 
-void tjs_assert(const struct AssertionInfo info);
+TJS_EXPORT void tjs_assert(const struct AssertionInfo info);
 
 #define TJS_CONST(x) JS_PROP_INT32_DEF(#x, x, JS_PROP_CONFIGURABLE)
 
-uv_loop_t *tjs_get_loop(JSContext *ctx);
-int tjs_obj2addr(JSContext *ctx, JSValueConst obj, struct sockaddr_storage *ss);
-JSValue tjs_addr2obj(JSContext *ctx, const struct sockaddr *sa);
-void tjs_call_handler(JSContext *ctx, JSValueConst func);
-void tjs_dump_error(JSContext *ctx);
-void tjs_dump_error1(JSContext *ctx, JSValueConst exception_val);
-void JS_FreePropEnum(JSContext *ctx, JSPropertyEnum *tab, uint32_t len);
+TJS_EXPORT uv_loop_t *tjs_get_loop(JSContext *ctx);
+TJS_EXPORT int tjs_obj2addr(JSContext *ctx, JSValueConst obj, struct sockaddr_storage *ss);
+TJS_EXPORT JSValue tjs_addr2obj(JSContext *ctx, const struct sockaddr *sa);
+TJS_EXPORT void tjs_call_handler(JSContext *ctx, JSValueConst func);
+TJS_EXPORT void tjs_dump_error(JSContext *ctx);
+TJS_EXPORT void tjs_dump_error1(JSContext *ctx, JSValueConst exception_val);
+TJS_EXPORT void JS_FreePropEnum(JSContext *ctx, JSPropertyEnum *tab, uint32_t len);
 
 typedef struct {
     JSValue p;
     JSValue rfuncs[2];
 } TJSPromise;
 
-JSValue TJS_InitPromise(JSContext *ctx, TJSPromise *p);
-bool TJS_IsPromisePending(JSContext *ctx, TJSPromise *p);
-void TJS_FreePromise(JSContext *ctx, TJSPromise *p);
-void TJS_FreePromiseRT(JSRuntime *rt, TJSPromise *p);
-void TJS_ClearPromise(JSContext *ctx, TJSPromise *p);
-void TJS_MarkPromise(JSRuntime *rt, TJSPromise *p, JS_MarkFunc *mark_func);
-void TJS_SettlePromise(JSContext *ctx, TJSPromise *p, bool is_reject, int argc, JSValueConst *argv);
-void TJS_ResolvePromise(JSContext *ctx, TJSPromise *p, int argc, JSValueConst *argv);
-void TJS_RejectPromise(JSContext *ctx, TJSPromise *p, int argc, JSValueConst *argv);
-JSValue TJS_NewResolvedPromise(JSContext *ctx, int argc, JSValueConst *argv);
-JSValue TJS_NewRejectedPromise(JSContext *ctx, int argc, JSValueConst *argv);
+TJS_EXPORT JSValue TJS_InitPromise(JSContext *ctx, TJSPromise *p);
+TJS_EXPORT bool TJS_IsPromisePending(JSContext *ctx, TJSPromise *p);
+TJS_EXPORT void TJS_FreePromise(JSContext *ctx, TJSPromise *p);
+TJS_EXPORT void TJS_FreePromiseRT(JSRuntime *rt, TJSPromise *p);
+TJS_EXPORT void TJS_ClearPromise(JSContext *ctx, TJSPromise *p);
+TJS_EXPORT void TJS_MarkPromise(JSRuntime *rt, TJSPromise *p, JS_MarkFunc *mark_func);
+TJS_EXPORT void TJS_SettlePromise(JSContext *ctx, TJSPromise *p, bool is_reject, int argc, JSValueConst *argv);
+TJS_EXPORT void TJS_ResolvePromise(JSContext *ctx, TJSPromise *p, int argc, JSValueConst *argv);
+TJS_EXPORT void TJS_RejectPromise(JSContext *ctx, TJSPromise *p, int argc, JSValueConst *argv);
+TJS_EXPORT JSValue TJS_NewResolvedPromise(JSContext *ctx, int argc, JSValueConst *argv);
+TJS_EXPORT JSValue TJS_NewRejectedPromise(JSContext *ctx, int argc, JSValueConst *argv);
 
-JSValue TJS_NewUint8Array(JSContext *ctx, uint8_t *data, size_t size);
+TJS_EXPORT JSValue TJS_NewUint8Array(JSContext *ctx, uint8_t *data, size_t size);
 
 #endif

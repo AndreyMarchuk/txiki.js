@@ -26,6 +26,7 @@
 #ifndef TJS_H
 #define TJS_H
 
+#include "tjs_export.h"
 #include "utils.h"
 
 #include <quickjs.h>
@@ -38,16 +39,18 @@ typedef struct TJSRunOptions {
     size_t stack_size;
 } TJSRunOptions;
 
-void TJS_DefaultOptions(TJSRunOptions *options);
-TJSRuntime *TJS_NewRuntime(void);
-TJSRuntime *TJS_NewRuntimeOptions(TJSRunOptions *options);
-void TJS_FreeRuntime(TJSRuntime *qrt);
-void TJS_SetupArgs(int argc, char **argv);
-JSContext *TJS_GetJSContext(TJSRuntime *qrt);
-TJSRuntime *TJS_GetRuntime(JSContext *ctx);
-void TJS_Run(TJSRuntime *qrt);
-void TJS_Stop(TJSRuntime *qrt);
-JSValue TJS_EvalFile(JSContext *ctx, const char *filename, int eval_flags, bool is_main, char *override_filename);
-void TJS_RunRepl(JSContext *ctx);
+TJS_EXPORT void TJS_DefaultOptions(TJSRunOptions *options);
+TJS_EXPORT TJSRuntime *TJS_NewRuntime(void);
+TJS_EXPORT TJSRuntime *TJS_NewRuntimeOptions(TJSRunOptions *options);
+TJS_EXPORT void TJS_FreeRuntime(TJSRuntime *qrt);
+TJS_EXPORT void TJS_SetupArgs(int argc, char **argv);
+TJS_EXPORT JSContext *TJS_GetJSContext(TJSRuntime *qrt);
+TJS_EXPORT TJSRuntime *TJS_GetRuntime(JSContext *ctx);
+TJS_EXPORT JSRuntime *TJS_GetJSRuntime(JSContext *ctx);
+TJS_EXPORT JSRuntime *TJS_GetJSRuntimeFromTJS(TJSRuntime *qrt);
+TJS_EXPORT void TJS_Run(TJSRuntime *qrt);
+TJS_EXPORT void TJS_Stop(TJSRuntime *qrt);
+TJS_EXPORT JSValue TJS_EvalFile(JSContext *ctx, const char *filename, int eval_flags, bool is_main, char *override_filename);
+TJS_EXPORT void TJS_RunRepl(JSContext *ctx);
 
 #endif

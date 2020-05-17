@@ -1,7 +1,14 @@
 .vscode
 .idea
+.vs
 
 build/
+cmake-build*
 src/version.h
+cacert.pem
+
+deps/wasm3/
+deps/replxx/
+deps/curl/
 
 .DS_Store

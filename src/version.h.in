@@ -31,6 +31,11 @@
 #define TJS_VERSION_PATCH @TJS__VERSION_PATCH@
 #define TJS_VERSION_SUFFIX "@TJS__VERSION_SUFFIX@"
 
-const char* tjs_version(void);
+#define TJS_VERSION_STRING                                                                                             \
+    STRINGIFY(TJS_VERSION_MAJOR) "." STRINGIFY(TJS_VERSION_MINOR) "." STRINGIFY(TJS_VERSION_PATCH) TJS_VERSION_SUFFIX
+
+const char *tjs_version(void) {
+    return TJS_VERSION_STRING;
+}
 
 #endif

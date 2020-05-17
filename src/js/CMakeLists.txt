@@ -1,7 +1,12 @@
 add_executable(qjsc
     src/qjsc.c
 )
-target_link_libraries(qjsc qjs m)
+
+target_link_libraries(qjsc qjs)
+
+if(NOT WIN32 OR MSYS OR MINGW)
+    target_link_libraries(qjsc m)
+endif()
 
 set(JS_PATH ${CMAKE_SOURCE_DIR}/src/js)
 set(js_files
@@ -20,7 +25,7 @@ set(js_files
     ${JS_PATH}/repl.js
     ${JS_PATH}/url.js
     ${JS_PATH}/uuid.js
-    ${JS_PATH}/wasm.js
+#    ${JS_PATH}/wasm.js
     ${JS_PATH}/worker-bootstrap.js
 )
 

@@ -897,10 +897,17 @@ static const JSCFunctionListEntry tjs_fs_funcs[] = {
     TJS_CONST(UV_FS_COPYFILE_FICLONE),
     TJS_CONST(UV_FS_COPYFILE_FICLONE_FORCE),
     TJS_CONST(S_IFMT),
+// madz: not available on win
+// potentially use this to fulfil feature on win https://github.com/JFLarvoire/SysToolsLib/tree/master/C/MsvcLibX
+#ifdef S_IFIFO
     TJS_CONST(S_IFIFO),
+#endif
     TJS_CONST(S_IFCHR),
     TJS_CONST(S_IFDIR),
+// madz: not available on win
+#ifdef S_IFBLK
     TJS_CONST(S_IFBLK),
+#endif
     TJS_CONST(S_IFREG),
 #ifdef S_IFSOCK
     TJS_CONST(S_IFSOCK),

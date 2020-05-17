@@ -26,7 +26,11 @@
 #include "utils.h"
 #include "version.h"
 
+#ifdef _MSC_VER
+#include "unistdwin.h"
+#else
 #include <unistd.h>
+#endif
 
 #ifdef TJS_HAVE_CURL
 #include <curl/curl.h>

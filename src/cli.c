@@ -24,7 +24,9 @@
  * THE SOFTWARE.
  */
 
-#include "private.h"
+//#include "private.h"
+#include "../deps/quickjs/src/list.h"
+#include "../deps/quickjs/src/cutils.h"
 #include "tjs.h"
 #include "version.h"
 
@@ -125,7 +127,7 @@ static void print_help(void) {
 }
 
 static void print_version() {
-    printf("v%s\n", tjs_version());
+    printf("v%s\n", TJS_VERSION_STRING);
 }
 
 static void report_bad_option(char *name) {

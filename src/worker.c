@@ -25,7 +25,11 @@
 #include "private.h"
 #include "tjs.h"
 
+#ifdef _MSC_VER
+#include "unistdwin.h"
+#else
 #include <unistd.h>
+#endif
 
 
 extern const uint8_t worker_bootstrap[];

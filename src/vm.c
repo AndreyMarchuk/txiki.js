@@ -306,6 +306,15 @@ TJSRuntime *TJS_GetRuntime(JSContext *ctx) {
     return JS_GetContextOpaque(ctx);
 }
 
+JSRuntime *TJS_GetJSRuntime(JSContext *ctx) {
+    return TJS_GetRuntime(ctx)->rt;
+}
+
+JSRuntime *TJS_GetJSRuntimeFromTJS(TJSRuntime *qrt) {
+    return qrt->rt;
+}
+
+
 static void uv__idle_cb(uv_idle_t *handle) {
     // Noop
 }

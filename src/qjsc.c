@@ -31,7 +31,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#if !defined(_WIN32)
+#include <sys/wait.h>
+#endif
+
+#ifndef _MSC_VER
 #include <unistd.h>
+#endif
+
 
 /* BEGIN: copied over from quickjs-libc to avoid dependency. */
 
@@ -318,10 +325,25 @@ int main(int argc, char **argv) {
     module = -1;
     byte_swap = FALSE;
 
+#ifdef _MSC_VER
+    int optind = 1;
+    const char *optarg = NULL;
+    for (; optind < argc; ++optind) {
+        if (argv[optind][0] == '-' || argv[optind][0] == '/') {
+            c = argv[optind][1];
+            if (strchr("oNfMp", c)) {
+                optarg = argv[++optind];
+            }
+        } else {
+            break;
+        }
+#else
     for (;;) {
+
         c = getopt(argc, argv, "ho:mx");
         if (c == -1)
             break;
+#endif
         switch (c) {
             case 'h':
                 help();

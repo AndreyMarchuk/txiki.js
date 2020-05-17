@@ -38,6 +38,12 @@
 #include <curl/curl.h>
 #endif
 
+#ifdef _MSC_VER
+//not #if defined(_WIN32) || defined(_WIN64) because we have strncasecmp in mingw
+#define strncasecmp _strnicmp
+#define strcasecmp _stricmp
+#endif
+
 #define kDefaultReadSize 65536
 
 struct TJSRuntime {
@@ -89,8 +95,10 @@ void tjs_mod_timers_init(JSContext *ctx, JSModuleDef *m);
 void tjs_mod_timers_export(JSContext *ctx, JSModuleDef *m);
 void tjs_mod_udp_init(JSContext *ctx, JSModuleDef *m);
 void tjs_mod_udp_export(JSContext *ctx, JSModuleDef *m);
+#ifdef TJS_HAVE_WASM
 void tjs_mod_wasm_init(JSContext *ctx, JSModuleDef *m);
 void tjs_mod_wasm_export(JSContext *ctx, JSModuleDef *m);
+#endif
 void tjs_mod_worker_init(JSContext *ctx, JSModuleDef *m);
 void tjs_mod_worker_export(JSContext *ctx, JSModuleDef *m);
 void tjs_mod_xhr_init(JSContext *ctx, JSModuleDef *m);

@@ -40,7 +40,11 @@ extern "C" {
 #else
 #define js_likely(x)     (x)
 #define js_unlikely(x)   (x)
+#ifdef _MSC_VER
+#define js_force_inline  __forceinline
+#else
 #define js_force_inline  inline
+#endif
 #define __js_printf_like(a, b)
 #endif
 
@@ -64,6 +68,17 @@ typedef uint32_t JSAtom;
 #define JS_NAN_BOXING
 #endif
 
+#ifndef CONFIG_VERSION
+#define CONFIG_VERSION "2020-04-12"
+#endif
+
+#ifdef _MSC_VER
+#ifndef ssize_t
+//typedef size_t ssize_t;
+// make it compatible with uv/win.h, otherwise clang-cl compiler errors out on build
+typedef intptr_t ssize_t;
+#endif
+#endif
 enum {
     /* all tags with a reference count are negative */
     JS_TAG_FIRST       = -11, /* first negative tag */
