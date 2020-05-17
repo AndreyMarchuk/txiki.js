@@ -6,7 +6,7 @@ all: build
 
 build:
 	@mkdir -p $(BUILD_DIR)
-	cd $(BUILD_DIR); cmake ../ -DCMAKE_BUILD_TYPE=$(BUILDTYPE) -G'MSYS Makefiles'  -DDISABLE_WASM=ON
+	cd $(BUILD_DIR); cmake ../ -DCMAKE_BUILD_TYPE=$(BUILDTYPE) -DDISABLE_WASM=ON
 	$(MAKE) -C $(BUILD_DIR) -j8
 
 # -GNinja
