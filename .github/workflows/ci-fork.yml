@@ -1,0 +1,102 @@
+name: CI2
+
+on: 
+  push:
+    branches:
+    - master
+
+jobs:
+  build-linux:
+    name: Linux
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        buildType: [Debug, Release]
+        compiler: [gcc, clang]
+    env:
+      BUILDTYPE: ${{ matrix.buildType }}
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        submodules: true
+    - name: Dependencies
+      run: |
+        sudo apt install -y libcurl4-openssl-dev
+        if [ "${{ matrix.compiler }}" = "clang" ]; then
+          sudo apt install -y clang
+          echo "::set-env name=CC::clang"
+          echo "::set-env name=CXX::clang++"
+        fi
+    - name: Build it
+      run: make
+    - name: Test it
+      run: make test
+    - name: Test it (advanced)
+      run: make test-advanced
+  build-macos:
+    name: macOS
+    runs-on: macOS-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        buildType: [Debug, Release]
+    env:
+      BUILDTYPE: ${{ matrix.buildType }}
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        submodules: true
+    - name: Build it
+      run: make
+    - name: Test it
+      run: make test
+    - name: Test it (advanced)
+      run: make test-advanced
+  build-win:
+    name: windows
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        buildType: [Debug, Release]
+    env:
+      BUILDTYPE: ${{ matrix.buildType }}
+    steps:
+      - name: Setup Developer Command Prompt
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x86
+          toolset: 14.xx
+      - name: Check out source code
+        uses: actions/checkout@v1
+        with:
+          submodules: true
+      - name: Building using msvc
+        shell: cmd
+        run: |
+          mkdir -p build
+          cd build
+          cmake ../ -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=$(BUILDTYPE) -DDISABLE_WASM=ON
+          nmake -C build -j8
+        
+#   build-alpine:
+#     name: Alpine Linux
+#     runs-on: ubuntu-latest
+#     container: alpine:3.10
+#     strategy:
+#       fail-fast: false
+#       matrix:
+#         buildType: [Debug, Release]
+#     env:
+#       BUILDTYPE: ${{ matrix.buildType }}
+#     steps:
+#     - uses: actions/checkout@v1
+#       with:
+#         submodules: true
+#     - name: Prepare
+#       run: apk add build-base cmake curl-dev --update-cache
+#     - name: Build it
+#       run: make
+#     - name: Test it
+#       run: make test
