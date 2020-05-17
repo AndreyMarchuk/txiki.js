@@ -64,14 +64,13 @@ jobs:
       BUILDTYPE: ${{ matrix.buildType }}
     steps:
     - uses: actions/checkout@v1
-      with:
-        submodules: true
-    - name: Build it
-      run: make
-    - name: Test it
-      run: make test
-    - name: Test it (advanced)
-      run: make test-advanced
+    - uses: ilammy/msvc-dev-cmd@v1
+    - name: Build something requiring CL.EXE
+      run: |
+        mkdir -p build
+        cd build; cmake ../ -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=$(BUILDTYPE) -DDISABLE_WASM=ON
+        nmake -C build -j8
+        
 #   build-alpine:
 #     name: Alpine Linux
 #     runs-on: ubuntu-latest
