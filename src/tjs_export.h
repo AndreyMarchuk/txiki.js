@@ -2,7 +2,11 @@
 #ifndef TJS_EXPORT_H
 #define TJS_EXPORT_H
 
-#ifdef TJS_STATIC_DEFINE
+/*
+ * For use in Windows DLLs
+ */
+
+#if defined( TJS_STATIC_DEFINE ) || !defined( _WIN32 )
 #  define TJS_EXPORT
 #  define TJS_NO_EXPORT
 #else
@@ -22,7 +26,11 @@
 #endif
 
 #ifndef TJS_DEPRECATED
-#  define TJS_DEPRECATED __declspec(deprecated)
+#  if defined( _WIN32 )
+#    define TJS_DEPRECATED __declspec(deprecated)
+#  else
+#    define TJS_DEPRECATED
+#  endif
 #endif
 
 #ifndef TJS_DEPRECATED_EXPORT
