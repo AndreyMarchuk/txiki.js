@@ -1,7 +1,7 @@
 
 # txiki.js — The tiny JavaScript runtime [msvc]
 
-[![Build Status](https://github.com/AndreyMarchuk/txiki.js/workflows/CI/badge.svg)](https://github.com/saghul/txiki.js/actions)
+[![Build Status](https://github.com/AndreyMarchuk/txiki.js/workflows/CI/badge.svg)](https://github.com/AndreyMarchuk/txiki.js/actions)
 
 # Fork info
 The goal: add support for to build/link with MSVC-based projects while keeping the compatibility with already supported compilers (mingw, clang, gcc) 
