@@ -1,6 +1,9 @@
 name: CI_FORK
 
-on: [pull_request]
+on: 
+  push:
+    branches:
+    - master
 
 jobs:
   build-linux:
