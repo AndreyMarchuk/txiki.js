@@ -82,10 +82,12 @@ jobs:
       - name: Building using msvc
         shell: cmd
         run: |
-          mkdir -p build
-          cd build
-          cmake ../ -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=%BUILDTYPE% -DDISABLE_WASM=ON
-          nmake
+          mkdir -p build-msvc
+          cd build-msvc
+          cmake ../ -G "CodeBlocks - NMake Makefiles" -DCMAKE_BUILD_TYPE=%BUILDTYPE% -DDISABLE_WASM=ON
+          cd ..
+          cmake --build build-msvc --target tjse
+#          nmake
         
 #   build-alpine:
 #     name: Alpine Linux
