@@ -63,15 +63,14 @@ jobs:
     env:
       BUILDTYPE: ${{ matrix.buildType }}
     steps:
-      - name: Setup Developer Command Prompt
-        uses: ilammy/msvc-dev-cmd@v1
-        with:
-          arch: x86
-          toolset: 14.xx
       - name: Check out source code
         uses: actions/checkout@v1
         with:
           submodules: true
+      - name: Setup Developer Command Prompt
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x86
       - name: Building using msvc
         shell: cmd
         run: |
