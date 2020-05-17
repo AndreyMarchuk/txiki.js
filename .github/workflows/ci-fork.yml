@@ -76,7 +76,7 @@ jobs:
         run: |
           mkdir -p build
           cd build
-          cmake ../ -GNinja -DCMAKE_BUILD_TYPE=$(BUILDTYPE) -DDISABLE_WASM=ON
+          cmake ../ -GNinja -DCMAKE_BUILD_TYPE=%BUILDTYPE% -DDISABLE_WASM=ON
           cd ..
           ninja -C build -j8
         
