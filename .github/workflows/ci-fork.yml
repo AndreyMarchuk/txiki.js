@@ -71,14 +71,22 @@ jobs:
         uses: ilammy/msvc-dev-cmd@v1
         with:
           arch: x86
+#       - name: Building using gcc
+#         shell: cmd
+#         run: |
+#           mkdir -p build-gcc
+#           cd build-gcc
+#           cmake ../ -GNinja -DCMAKE_BUILD_TYPE=%BUILDTYPE% -DDISABLE_WASM=ON
+#           cd ..
+#           ninja -C build-gcc -j8
       - name: Building using msvc
         shell: cmd
         run: |
           mkdir -p build
           cd build
-          cmake ../ -GNinja -DCMAKE_BUILD_TYPE=%BUILDTYPE% -DDISABLE_WASM=ON
+          cmake ../ -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=%BUILDTYPE% -DDISABLE_WASM=ON
           cd ..
-          ninja -C build -j8
+          nmake -C build 
         
 #   build-alpine:
 #     name: Alpine Linux
