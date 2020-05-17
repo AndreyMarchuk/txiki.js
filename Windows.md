@@ -1,5 +1,8 @@
 # Windows support
 
+**This version supports msvc and clang-cl build** \
+_(instructions below cover only MSYS2/MinGW build)_
+
 Windows support it's currently experimental. Tests do pass, but building is not
 as easy as it should be.
 

@@ -1,7 +1,18 @@
 
-# txiki.js — The tiny JavaScript runtime
+# txiki.js — The tiny JavaScript runtime [msvc]
 
-[![Build Status](https://github.com/saghul/txiki.js/workflows/CI/badge.svg)](https://github.com/saghul/txiki.js/actions)
+[![Build Status](https://github.com/AndreyMarchuk/txiki.js/workflows/CI/badge.svg)](https://github.com/saghul/txiki.js/actions)
+
+# Fork info
+The goal: add support for to build/link with MSVC-based projects while keeping the compatibility with already supported compilers (mingw, clang, gcc) 
+
+- support msvc, clang-cl and mingw builds on Windows
+- tjs is built as a dynamic library
+- tjse cli tool is built against dynamic lib
+- wasm is not supported yet, disable with cmake flag -DDISABLE_WASM=ON 
+
+---
+_original repo readme below_
 
 ## Overview
 
