@@ -76,8 +76,8 @@ jobs:
         run: |
           mkdir -p build
           cd build
-          cmake ../ -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=$(BUILDTYPE) -DDISABLE_WASM=ON
-          nmake -C build -j8
+          cmake ../ -GNinja -DCMAKE_BUILD_TYPE=$(BUILDTYPE) -DDISABLE_WASM=ON
+          ninja -C build -j8
         
 #   build-alpine:
 #     name: Alpine Linux
