@@ -85,8 +85,7 @@ jobs:
           mkdir -p build
           cd build
           cmake ../ -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=%BUILDTYPE% -DDISABLE_WASM=ON
-          cd ..
-          nmake -C build 
+          nmake
         
 #   build-alpine:
 #     name: Alpine Linux
