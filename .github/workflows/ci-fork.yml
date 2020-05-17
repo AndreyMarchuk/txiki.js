@@ -63,13 +63,20 @@ jobs:
     env:
       BUILDTYPE: ${{ matrix.buildType }}
     steps:
-    - uses: actions/checkout@v1
-    - uses: ilammy/msvc-dev-cmd@v1
-    - name: Build something requiring CL.EXE
-      run: |
-        mkdir -p build
-        cd build; cmake ../ -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=$(BUILDTYPE) -DDISABLE_WASM=ON
-        nmake -C build -j8
+      - name: Setup Developer Command Prompt
+        uses: ilammy/msvc-dev-cmd@v1
+      - name: Check out source code
+        uses: actions/checkout@v1
+        with:
+          arch: x86
+          toolset: 14.xx
+      - name: Building using msvc
+        shell: cmd
+        run: |
+          mkdir -p build
+          cd build
+          cmake ../ -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=$(BUILDTYPE) -DDISABLE_WASM=ON
+          nmake -C build -j8
         
 #   build-alpine:
 #     name: Alpine Linux
