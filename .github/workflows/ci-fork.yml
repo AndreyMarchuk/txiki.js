@@ -71,13 +71,23 @@ jobs:
         uses: ilammy/msvc-dev-cmd@v1
         with:
           arch: x86
+#       - name: Building using gcc
+#         shell: cmd
+#         run: |
+#           mkdir -p build-gcc
+#           cd build-gcc
+#           cmake ../ -GNinja -DCMAKE_BUILD_TYPE=%BUILDTYPE% -DDISABLE_WASM=ON
+#           cd ..
+#           ninja -C build-gcc -j8
       - name: Building using msvc
         shell: cmd
         run: |
-          mkdir -p build
-          cd build
-          cmake ../ -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=$(BUILDTYPE) -DDISABLE_WASM=ON
-          nmake -C build -j8
+          mkdir -p build-msvc
+          cd build-msvc
+          cmake ../ -G "CodeBlocks - NMake Makefiles" -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_BUILD_TYPE=%BUILDTYPE% -DDISABLE_WASM=ON
+          cd ..
+          cmake --build build-msvc --target tjse
+#          nmake
         
 #   build-alpine:
 #     name: Alpine Linux
