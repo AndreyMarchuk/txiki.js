@@ -167,7 +167,7 @@ add_library(tjs SHARED
     src/wasm.c
     src/worker.c
     src/xhr.c
-        # JS files compiled into binary
+    # JS files compiled into binary
     ${CMAKE_CURRENT_BINARY_DIR}/js.c
     deps/quickjs/src/cutils.c)
 

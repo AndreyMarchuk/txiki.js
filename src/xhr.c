@@ -180,10 +180,14 @@ static void curl__done_cb(CURLcode result, void *arg) {
     maybe_emit_event(x, XHR_EVENT_LOAD_END, JS_UNDEFINED);
 
     if (result != CURLE_OPERATION_TIMEDOUT) {
-        if (result != CURLE_OK)
+        if (result != CURLE_OK) {
+#if 0
+            printf("xhr curl error: %s", curl_easy_strerror(result));
+#endif
             maybe_emit_event(x, XHR_EVENT_ERROR, JS_UNDEFINED);
-        else
+        } else {
             maybe_emit_event(x, XHR_EVENT_LOAD, JS_UNDEFINED);
+        }
     }
 }
 

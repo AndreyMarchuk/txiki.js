@@ -40,5 +40,8 @@ typedef struct {
 void tjs_curl_init(void);
 int tjs_curl_load_http(DynBuf *dbuf, const char *url);
 CURLM *tjs__get_curlm(JSContext *ctx);
+char *last_curl_strerror;
+const char * tjs_curl_last_strerror();
+
 
 #endif

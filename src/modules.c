@@ -41,7 +41,7 @@ JSModuleDef *tjs__load_http(JSContext *ctx, const char *url) {
     int r = tjs_curl_load_http(&dbuf, url);
     if (r != 200) {
         m = NULL;
-        JS_ThrowReferenceError(ctx, "could not load '%s' code: %d", url, r);
+        JS_ThrowReferenceError(ctx, "could not load '%s' code: %d; curl error: %s", url, r, tjs_curl_last_strerror());
         goto end;
     }
 
@@ -74,6 +74,8 @@ JSModuleDef *tjs_module_loader(JSContext *ctx, const char *module_name, void *op
     static const char json_tpl_start[] = "export default JSON.parse(`";
     static const char json_tpl_end[] = "`);";
 
+    // printf("tjs_module_loader: %s\n", module_name);
+
     JSModuleDef *m;
     JSValue func_val;
     int r, is_json;
@@ -92,7 +94,7 @@ JSModuleDef *tjs_module_loader(JSContext *ctx, const char *module_name, void *op
 
     is_json = has_suffix(module_name, ".json");
 
-    /* Support importing JSON files bcause... why not? */
+    /* Support importing JSON files because... why not? */
     if (is_json)
         dbuf_put(&dbuf, (const uint8_t *) json_tpl_start, strlen(json_tpl_start));
 
@@ -223,6 +225,13 @@ char *tjs_module_normalizer(JSContext *ctx, const char *base_name, const char *n
     }
 
     p = strrchr(base_name, TJS__PATHSEP);
+    // on windows \ and / path seps are often mixed which leads to uncorrect module loading behavior
+    // todo: better version might be to correct pathsep in the whole string somewhere upstream
+#if defined(_WIN32)
+    char *p2 = strrchr(base_name, '/');
+    if (p2>p)
+        p = p2;
+#endif
     if (p)
         len = p - base_name;
     else

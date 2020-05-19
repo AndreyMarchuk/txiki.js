@@ -45,6 +45,10 @@ size_t curl__write_cb(char *ptr, size_t size, size_t nmemb, void *userdata) {
     return realsize;
 }
 
+const char * tjs_curl_last_strerror() {
+    return last_curl_strerror;
+}
+
 int tjs_curl_load_http(DynBuf *dbuf, const char *url) {
     tjs_curl_init();
 
@@ -83,6 +87,8 @@ int tjs_curl_load_http(DynBuf *dbuf, const char *url) {
 
     if (res != CURLE_OK) {
         r = -res;
+        // todo: malloc/copy this char* due to curl deallocing mem after cleanup (?)
+        last_curl_strerror = curl_easy_strerror(res);
 #if 0
         printf("CURL ERROR: %d %s\n", res,  curl_easy_strerror(res));
 #endif
