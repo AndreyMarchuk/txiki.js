@@ -26,11 +26,15 @@
 #ifndef TJS_H
 #define TJS_H
 
-#include "tjs_export.h"
-#include "utils.h"
-
 #include <quickjs.h>
 #include <stdbool.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include "tjs_export.h"
+#include "utils.h"
 
 typedef struct TJSRuntime TJSRuntime;
 
@@ -52,5 +56,9 @@ TJS_EXPORT void TJS_Run(TJSRuntime *qrt);
 TJS_EXPORT void TJS_Stop(TJSRuntime *qrt);
 TJS_EXPORT JSValue TJS_EvalFile(JSContext *ctx, const char *filename, int eval_flags, bool is_main, char *override_filename);
 TJS_EXPORT void TJS_RunRepl(JSContext *ctx);
+
+#ifdef __cplusplus
+} /* extern "C" { */
+#endif
 
 #endif
