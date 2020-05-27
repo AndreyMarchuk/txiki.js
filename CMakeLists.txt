@@ -193,6 +193,9 @@ string(TOLOWER ${CMAKE_SYSTEM_NAME} TJS_PLATFORM)
 target_compile_definitions(tjs PRIVATE TJS__PLATFORM="${TJS_PLATFORM}")
 # instruct to link repl statically (different symbol names)
 target_compile_definitions(tjs PRIVATE REPLXX_STATIC)
+# instruct QJS to avoid dll exports with static build
+target_compile_definitions(tjs PRIVATE QJS_STATIC_DEFINE)
+
 
 if (NOT DISABLE_WASM)
     target_compile_definitions(tjs PRIVATE

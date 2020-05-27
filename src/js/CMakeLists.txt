@@ -8,6 +8,9 @@ if(NOT WIN32 OR MSYS OR MINGW)
     target_link_libraries(qjsc m)
 endif()
 
+# instruct QJS to avoid dll exports with static build
+target_compile_definitions(qjsc PRIVATE QJS_STATIC_DEFINE)
+
 set(JS_PATH ${CMAKE_SOURCE_DIR}/src/js)
 set(js_files
     ${JS_PATH}/abort-controller.js
