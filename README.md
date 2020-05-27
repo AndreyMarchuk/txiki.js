@@ -9,7 +9,8 @@ The goal: add support for to build/link with MSVC-based projects while keeping t
 - support msvc, clang-cl and mingw builds on Windows
 - tjs is built as a dynamic library
 - tjse cli tool is built against dynamic lib
-- wasm is not supported yet, disable with cmake flag -DDISABLE_WASM=ON 
+- wasm is not supported yet, disable with cmake flag -DDISABLE_WASM=ON
+- tjspp: txiki.js C++ wrapper (based on [quickjspp](https://github.com/ftk/quickjspp))
 
 ---
 _original repo readme below_

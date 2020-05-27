@@ -26,6 +26,7 @@
 #define TJS_UTILS_H
 
 #include "tjs_export.h"
+
 #include <quickjs.h>
 #include <stdbool.h>
 #include <stdlib.h>

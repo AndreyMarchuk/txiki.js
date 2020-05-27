@@ -376,7 +376,7 @@ QJS_EXPORT JSRuntime *JS_NewRuntime2(const JSMallocFunctions *mf, void *opaque);
 QJS_EXPORT void JS_FreeRuntime(JSRuntime *rt);
 QJS_EXPORT void *JS_GetRuntimeOpaque(JSRuntime *rt);
 QJS_EXPORT void JS_SetRuntimeOpaque(JSRuntime *rt, void *opaque);
-QJS_EXPORT typedef void JS_MarkFunc(JSRuntime *rt, JSGCObjectHeader *gp);
+typedef void JS_MarkFunc(JSRuntime *rt, JSGCObjectHeader *gp);
 QJS_EXPORT void JS_MarkValue(JSRuntime *rt, JSValueConst val, JS_MarkFunc *mark_func);
 QJS_EXPORT void JS_RunGC(JSRuntime *rt);
 QJS_EXPORT JS_BOOL JS_IsLiveObject(JSRuntime *rt, JSValueConst obj);

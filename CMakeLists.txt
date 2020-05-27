@@ -308,9 +308,11 @@ install(
 # headers
 install(
 	FILES
-		src/tjs.h
+        src/tjs.h
+        src/tjs_export.h
         src/utils.h
         src/version.h
+        include/tjspp.hpp
         deps/quickjs/include/quickjs.h
 	DESTINATION
 		${CMAKE_INSTALL_INCLUDEDIR}

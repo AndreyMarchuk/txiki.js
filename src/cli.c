@@ -25,8 +25,8 @@
  */
 
 //#include "private.h"
-#include "../deps/quickjs/src/list.h"
 #include "../deps/quickjs/src/cutils.h"
+#include "../deps/quickjs/src/list.h"
 #include "tjs.h"
 #include "version.h"
 
