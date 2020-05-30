@@ -4,7 +4,7 @@
 [![Build Status](https://github.com/AndreyMarchuk/txiki.js/workflows/CI2/badge.svg)](https://github.com/AndreyMarchuk/txiki.js/actions)
 
 # Fork info
-The goal: add support for to build/link with MSVC-based projects while keeping the compatibility with already supported compilers (mingw, clang, gcc) 
+The goal: support build/link with MSVC-based projects while keeping the compatibility with already supported compilers (mingw, clang, gcc) 
 
 - support msvc, clang-cl and mingw builds on Windows
 - tjs is built as a dynamic library
